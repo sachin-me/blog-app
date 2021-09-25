@@ -23,6 +23,10 @@ app.use(express.urlencoded({ extended: true }));
 // It'll log api calls in console
 app.use(morgan("dev"));
 
+// using template engine ejs. It allows to use static template files
+app.set("views", path.join(__dirname, "./server/views"));
+app.set("view engine", "ejs");
+
 app.use(cors());
 
 // running the server
