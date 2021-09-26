@@ -26,7 +26,7 @@ function SignupForm(props) {
         />
       </Form.Group>
       <Button variant="primary" type="submit">
-        Submit
+        Signup
       </Button>
     </Form>
   );
