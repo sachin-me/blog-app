@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const path = require("path");
 
-// It loads environment variables from .env file 
+// It loads environment variables from .env file
 require("dotenv").config();
 
 const port = process.env.PORT;
@@ -49,6 +49,8 @@ app.use(cors());
 
 // It'll render index.ejs template on every routes
 app.use(require("./server/routes/index"));
+// All the API calls will go through route
+app.use("/api", require("./server/routes/api"));
 
 // running the server
 app.listen(port, () => {
