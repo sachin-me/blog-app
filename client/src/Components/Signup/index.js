@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import userAction from "../../store/actions/userAction";
 import helperFunctions from "../../Utility";
 import Message from "../Common/Message";
@@ -29,7 +30,13 @@ function Signup(props) {
       email,
       password,
     };
-    dispatch(userAction.create(payload));
+    dispatch(
+      userAction.create(payload, (success) => {
+        if (success) {
+          props.history.push("/login");
+        }
+      })
+    );
   };
 
   const validateEmailPassword = () => {
@@ -70,6 +77,10 @@ function Signup(props) {
         validateEmailPassword={validateEmailPassword}
       />
       <Message message={message} error={error} />
+      <div className="mt-2 center">
+        <span>Already has an account? </span>
+        <Link to="/login">Login</Link>
+      </div>
     </div>
   );
 }

@@ -17,11 +17,13 @@ const userAction = {
             payload: data.data,
             message: data.message,
           });
+          cb(true);
         } else {
           dispatch({
             type: "USER_SIGNUP_FAIL",
             error: data.error,
           });
+          cb(false);
         }
       });
   },
