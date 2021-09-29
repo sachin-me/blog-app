@@ -44,8 +44,25 @@ body {
     padding: 1rem 0;
     text-align: center;
   }
+  div {
+    text-align: center;
+    a {
+      text-decoration: none;
+    }
+  }
 }
 
-.login-card {
-  height: 50% !important;
+// user creation form
+.form-wrapper {
+  max-width: 500px;
+  width: 100%;
+  margin: 60px auto;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 2rem;
+}
+
+// common
+.center {
+  text-align: center;
 }

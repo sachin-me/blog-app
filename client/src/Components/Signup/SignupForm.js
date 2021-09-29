@@ -1,14 +1,22 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
 
-function SignupForm(props) {
+function SignupForm({
+  setName,
+  setEmail,
+  setPassword,
+  handleSubmit,
+  validateEmailPassword,
+}) {
   return (
-    <Form>
+    <Form onSubmit={(event) => handleSubmit(event)}>
       <Form.Group className="mb-3" controlId="formBasicName">
         <Form.Label>Name</Form.Label>
         <Form.Control
           type="text"
           placeholder="Enter name"
+          onChange={(event) => setName(event.target.value)}
+          required
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -16,6 +24,10 @@ function SignupForm(props) {
         <Form.Control
           type="email"
           placeholder="Enter email"
+          onChange={(event) => {
+            setEmail(event.target.value);
+            validateEmailPassword();
+          }}
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -23,6 +35,10 @@ function SignupForm(props) {
         <Form.Control
           type="password"
           placeholder="Password"
+          onChange={(event) => {
+            setPassword(event.target.value);
+            validateEmailPassword();
+          }}
         />
       </Form.Group>
       <Button variant="primary" type="submit">
