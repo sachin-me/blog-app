@@ -1,4 +1,5 @@
 const express = require("express");
+const postController = require("../controllers/post.controller");
 const userController = require("../controllers/user.controller");
 const router = express.Router();
 
@@ -7,4 +8,8 @@ router.post("/signup", userController.create);
 // This api'll login the user
 router.post("/login", userController.login);
 
+// POST Api starts here
+router.post("/post", postController.create);
+
+// POST Api ends here
 module.exports = router;
