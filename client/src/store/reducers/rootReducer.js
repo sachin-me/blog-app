@@ -21,6 +21,21 @@ function rootReducer(state = initState, action) {
       };
     }
 
+    case "USER_LOGIN_SUCCESS": {
+      return {
+        ...state,
+        message: action.message,
+        user: action.payload,
+      };
+    }
+
+    case "USER_LOGIN_FAIL": {
+      return {
+        ...state,
+        error: action.error,
+      };
+    }
+
     default:
       return state;
   }
