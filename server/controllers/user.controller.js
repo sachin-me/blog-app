@@ -84,38 +84,48 @@ const userController = {
       });
     }
 
-    const user = await User.findOne({ email: email });
-    if (!user) {
-      return res.status(404).json({
-        error: "No matching user found. Please create a user.",
+    try {
+      const user = await User.findOne({ email: email });
+      if (!user) {
+        return res.status(404).json({
+          error: "No matching user found. Please create a user.",
+        });
+      }
+
+      const id = user._id;
+      const checkPassword = await argon2.verify(user.password, password);
+
+      if (!checkPassword) {
+        return res.status(401).json({
+          error: "Password is incorrect.",
+        });
+      }
+
+      const token = jwt.sign(
+        {
+          id,
+        },
+        "secret"
+      );
+
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 84000000),
+        httpOnly: true,
+      });
+
+      return res.status(200).json({
+        message: `${user.name}, Successfully logged in`,
+        user: {
+          name: user.name,
+          email,
+          id,
+        },
+      });
+    } catch (error) {
+      return res.status(500).json({
+        error: "Something went wrong.",
       });
     }
-
-    const id = user._id;
-    const checkPassword = await argon2.verify(user.password, password);
-
-    if (!checkPassword) {
-      return res.status(401).json({
-        error: "Password is incorrect.",
-      });
-    }
-
-    const token = jwt.sign(
-      {
-        id,
-      },
-      "secret"
-    );
-
-    return res.status(200).json({
-      message: `${user.name}, Successfully logged in`,
-      token,
-      user: {
-        name: user.name,
-        email,
-        id,
-      },
-    });
   },
 };
 

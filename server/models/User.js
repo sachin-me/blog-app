@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const SALT_ROUNDS = 10;
+const argon2 = require("argon2");
 
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
@@ -9,9 +8,9 @@ const userSchema = new Schema({
   password: { type: String },
 });
 
-UserSchema.pre("save", function (next) {
+userSchema.pre("save", async function (next) {
   if (this.password) {
-    this.password = bcrypt.hashSync(this.password, SALT_ROUNDS);
+    this.password = await argon2.hash(this.password);
     next();
   } else {
     next();
