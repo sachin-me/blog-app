@@ -1,7 +1,12 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
 
-function LoginForm({ setEmail, setPassword, handleSubmit }) {
+function LoginForm({
+  setEmail,
+  setPassword,
+  handleSubmit,
+  validateEmailPassword,
+}) {
   return (
     <Form onSubmit={(event) => handleSubmit(event)}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -9,7 +14,10 @@ function LoginForm({ setEmail, setPassword, handleSubmit }) {
         <Form.Control
           type="email"
           placeholder="Enter email"
-          onChange={(event) => setEmail(event.target.value)}
+          onChange={(event) => {
+            setEmail(event.target.value);
+            validateEmailPassword();
+          }}
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -17,7 +25,10 @@ function LoginForm({ setEmail, setPassword, handleSubmit }) {
         <Form.Control
           type="password"
           placeholder="Password"
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={(event) => {
+            setPassword(event.target.value);
+            validateEmailPassword();
+          }}
         />
       </Form.Group>
       <Button variant="primary" type="submit">
