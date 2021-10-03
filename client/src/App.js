@@ -4,6 +4,7 @@ import "./App.scss";
 import Dashboard from "./Components/Dashboard";
 import Header from "./Components/Header";
 import Login from "./Components/Login";
+import CreatePost from "./Components/Post/CreatePost";
 import Signup from "./Components/Signup";
 
 function App(params) {
@@ -14,6 +15,7 @@ function App(params) {
         <Route exact path="/" component={Dashboard} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/create-post" component={CreatePost} />
       </Switch>
     </BrowserRouter>
   );
