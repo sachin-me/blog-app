@@ -21,14 +21,20 @@ const postController = {
         error: "Text is required.",
       });
     }
+    if (!req.headers.cookie.includes("token")) {
+      return res.status(401).json({
+        error: "Please login.",
+      });
+    }
 
-    const { token } = req.cookies;
+    let token = req.headers.cookie.split("token=");
+    token = token[token.length - 1];
     const user = jwt.verify(token, "secret");
     const { id } = user;
 
     if (!id) {
-      return res.status(401).json({
-        error: "Please login.",
+      return res.status(404).json({
+        error: "User not found.",
       });
     }
 
@@ -46,7 +52,6 @@ const postController = {
       } else {
         return res.status(200).json({
           message: "Post created successfully",
-          post,
         });
       }
     });
