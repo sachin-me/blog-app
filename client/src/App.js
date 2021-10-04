@@ -7,6 +7,7 @@ import Header from "./Components/Header";
 import Login from "./Components/Login";
 import CreatePost from "./Components/Post/CreatePost";
 import Signup from "./Components/Signup";
+import PublicRoutes from "./Components/PublicRoutes";
 
 function App(props) {
   const [loading, setLoading] = useState(true);
@@ -32,8 +33,8 @@ function App(props) {
       <Header />
       <Switch>
         <Route exact path="/" component={Dashboard} />
-        <Route exact path="/signup" component={Signup} />
-        <Route exact path="/login" component={Login} />
+        <PublicRoutes exact path="/signup" component={Signup} />
+        <PublicRoutes exact path="/login" component={Login} />
         <Route exact path="/create-post" component={CreatePost} />
       </Switch>
     </BrowserRouter>
