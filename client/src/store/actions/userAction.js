@@ -38,6 +38,8 @@ const userAction = {
       .then((res) => res.json())
       .then((data) => {
         if (data.message) {
+          localStorage.setItem("user", JSON.stringify(data.user));
+          localStorage.setItem("token", data.token);
           dispatch({
             type: "USER_LOGIN_SUCCESS",
             payload: data.user,

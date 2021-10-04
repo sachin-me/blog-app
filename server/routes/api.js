@@ -7,8 +7,6 @@ const router = express.Router();
 router.post("/signup", userController.create);
 // This api'll login the user
 router.post("/login", userController.login);
-// Getting current loggedin user data at this API
-router.get("/profile", userController.loggedInUser);
 
 // POST Api starts here
 router.post("/post", postController.create);

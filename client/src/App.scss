@@ -23,6 +23,19 @@ body {
   }
 }
 
+.nav-link {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  div {
+    color: #EFEFEF;
+    cursor: pointer;
+    font-size: 1.2rem;
+  }
+}
+
 // Dashboard
 .dashboard {
   display: flex;
@@ -65,4 +78,10 @@ body {
 // common
 .center {
   text-align: center;
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  right: 50%;
 }
