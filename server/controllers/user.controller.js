@@ -115,6 +115,7 @@ const userController = {
 
       return res.status(200).json({
         message: `${user.name}, Successfully logged in`,
+        token,
         user: {
           name: user.name,
           email,
@@ -126,6 +127,12 @@ const userController = {
         error: "Something went wrong.",
       });
     }
+  },
+  logoutUser: async (req, res, next) => {
+    res.clearCookie("token");
+    return res.json({
+      message: "You're logged out. Please login to continue.",
+    });
   },
 };
 
