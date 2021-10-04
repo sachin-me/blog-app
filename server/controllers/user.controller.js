@@ -127,6 +127,33 @@ const userController = {
       });
     }
   },
+  loggedInUser: async (req, res) => {
+
+    if (!req.headers.cookie.includes("token")) {
+      return res.status(401).json({
+        error: "Please login.",
+      });
+    }
+
+    let token = req.headers.cookie.split("token=");
+    token = token[token.length - 1];
+    const user = jwt.verify(token, "secret");
+    const { id } = user;
+
+    if (id) {
+      const user = await User.findOne({ _id: id }).select("-password");
+      if (!user) {
+        return res.status(404).json({
+          error: "No matching user found. Please create a user.",
+        });
+      } else {
+        return res.status(200).json({
+          message: `You're logged in as ${user.name}.`,
+          user,
+        });
+      }
+    }
+  },
 };
 
 module.exports = userController;
