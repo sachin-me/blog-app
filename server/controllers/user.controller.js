@@ -128,6 +128,12 @@ const userController = {
       });
     }
   },
+  logoutUser: async (req, res, next) => {
+    res.clearCookie("token");
+    return res.json({
+      message: "You're logged out. Please login to continue.",
+    });
+  },
 };
 
 module.exports = userController;

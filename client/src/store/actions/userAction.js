@@ -55,6 +55,27 @@ const userAction = {
         }
       });
   },
+  logout: (cb) => (dispatch) => {
+    fetch(`${uri}/logout`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "same-origin", // send cookies
+    })
+      .then((res) => res.json())
+      .then((user) => {
+        if (user.message) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          dispatch({
+            type: "LOGOUT_USER",
+            message: user.message,
+          });
+          cb(true);
+        }
+      });
+  },
 };
 
 export default userAction;
