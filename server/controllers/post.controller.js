@@ -56,6 +56,18 @@ const postController = {
       }
     });
   },
+  list: async function (req, res) {
+    const posts = await Post.find({});
+    if (!posts) {
+      return res.status(404).json({
+        error: "No Post found :)",
+      });
+    }
+    return res.status(200).json({
+      message: "Posts found, successfully.",
+      posts,
+    });
+  },
 };
 
 module.exports = postController;

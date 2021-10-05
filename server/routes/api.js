@@ -12,6 +12,8 @@ router.delete("/logout", userController.logoutUser);
 
 // POST Api starts here
 router.post("/post", postController.create);
+// It'll get list of posts 
+router.get("/posts", postController.list);
 
 // POST Api ends here
 module.exports = router;
