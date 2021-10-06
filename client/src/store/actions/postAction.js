@@ -51,6 +51,29 @@ const postAction = {
       })
       .catch((err) => console.log(err));
   },
+  postDetails: (id, cb) => (dispatch) => {
+    fetch(`${uri}/post/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message) {
+          dispatch({
+            type: "POST_DETAILS_SUCCESS",
+            payload: data.post,
+          });
+          cb(true);
+        } else {
+          dispatch({
+            type: "POST_DETAILS_FAIL",
+            error: data.error,
+          });
+          cb(false);
+        }
+      });
+  },
 };
 
 export default postAction;
