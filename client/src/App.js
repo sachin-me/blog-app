@@ -8,6 +8,7 @@ import Login from "./Components/Login";
 import CreatePost from "./Components/Post/CreatePost";
 import Signup from "./Components/Signup";
 import PublicRoutes from "./Components/PublicRoutes";
+import DisplayPost from "./Components/Post/DisplayPost";
 
 function App(props) {
   const [loading, setLoading] = useState(true);
@@ -36,6 +37,7 @@ function App(props) {
         <PublicRoutes exact path="/signup" component={Signup} />
         <PublicRoutes exact path="/login" component={Login} />
         <Route exact path="/create-post" component={CreatePost} />
+        <Route exact path="/posts" component={DisplayPost} />
       </Switch>
     </BrowserRouter>
   );

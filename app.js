@@ -26,6 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 // It'll log api calls in console
 app.use(morgan("dev"));
 
+app.use(express.static(path.join(__dirname, "public")));
 // using template engine ejs. It allows to use static template files
 app.set("views", path.join(__dirname, "./server/views"));
 app.set("view engine", "ejs");
@@ -47,10 +48,10 @@ if (process.env.NODE_ENV === "development") {
 // it allows cors
 app.use(cors());
 
-// It'll render index.ejs template on every routes
-app.use(require("./server/routes/index"));
 // All the API calls will go through route
 app.use("/api", require("./server/routes/api"));
+// It'll render index.ejs template on every routes
+app.use("/", require("./server/routes/index"));
 
 // running the server
 app.listen(port, () => {

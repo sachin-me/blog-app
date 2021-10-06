@@ -27,6 +27,30 @@ const postAction = {
         }
       });
   },
+  list: (cb) => (dispatch) => {
+    fetch(`${uri}/posts`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message) {
+          dispatch({
+            type: "POST_LIST_SUCCESS",
+            payload: data.posts,
+          });
+          cb(true);
+        } else {
+          dispatch({
+            type: "POST_LIST_FAIL",
+            error: data.error,
+          });
+          cb(false);
+        }
+      })
+      .catch((err) => console.log(err));
+  },
 };
 
 export default postAction;

@@ -2,6 +2,7 @@ const initState = {
   user: {},
   message: "",
   error: "",
+  posts: [],
 };
 
 function rootReducer(state = initState, action) {
@@ -44,6 +45,20 @@ function rootReducer(state = initState, action) {
     }
 
     case "POST_CREATE_FAIL": {
+      return {
+        ...state,
+        error: action.error,
+      };
+    }
+
+    case "POST_LIST_SUCCESS": {
+      return {
+        ...state,
+        posts: action.payload,
+      };
+    }
+
+    case "POST_LIST_FAIL": {
       return {
         ...state,
         error: action.error,
