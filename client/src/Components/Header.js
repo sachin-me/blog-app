@@ -31,7 +31,7 @@ function Header(params) {
 
   const navigateToHome = () => {
     window.location.href = "/";
-  }
+  };
 
   if (loading) {
     return (
@@ -43,10 +43,13 @@ function Header(params) {
 
   return (
     <div className="header">
-      <div className="home" onClick={navigateToHome}>Blog</div>
+      <div className="home" onClick={navigateToHome}>
+        Blog
+      </div>
       {user.id && (
         <div className="nav-link">
           <Link to="/create-post">Create Post</Link>
+          <Link to="/posts">Posts</Link>
           <div onClick={handleLogout}>Logout</div>
         </div>
       )}
