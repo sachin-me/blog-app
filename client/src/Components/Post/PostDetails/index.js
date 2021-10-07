@@ -3,15 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { Card, Button } from "react-bootstrap";
 import Loader from "react-loader-spinner";
 import postAction from "../../../store/actions/postAction";
+import Message from "../../Common/Message";
 
 function PostDetails(props) {
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
 
-  const { post } = useSelector((state) => {
+  const { post, error } = useSelector((state) => {
     return {
       post: state.post,
+      error: state.error,
     };
   });
 
@@ -27,6 +29,19 @@ function PostDetails(props) {
     );
   }, []);
 
+  const handleDelete = (id) => {
+    dispatch(
+      postAction.deletePost(id, (success) => {
+        if (success) {
+          setLoading(false);
+          props.history.push("/posts");
+        } else {
+          setLoading(false);
+        }
+      })
+    );
+  };
+
   if (loading) {
     return (
       <div className="loader">
@@ -34,6 +49,7 @@ function PostDetails(props) {
       </div>
     );
   }
+  const user = JSON.parse(localStorage.getItem("user"));
 
   return (
     <Card className="center">
@@ -42,9 +58,18 @@ function PostDetails(props) {
           <Card.Title>{post.title}</Card.Title>
           <Card.Text>{post.text}</Card.Text>
           <Card.Text>{new Date(post.created_at).toLocaleString()}</Card.Text>
-          <Button variant="primary" type="submit">
-            Delete
-          </Button>
+          {post.user.includes(user.id) && (
+            <>
+              <Button
+                variant="primary"
+                type="submit"
+                onClick={() => handleDelete(post._id)}
+              >
+                Delete
+              </Button>
+              <Message message={null} error={error} />
+            </>
+          )}
         </Card.Body>
       )) || <Card.Body className="card-info">No Post found :)</Card.Body>}
     </Card>

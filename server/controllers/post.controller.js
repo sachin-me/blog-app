@@ -82,6 +82,14 @@ const postController = {
       post,
     });
   },
+  deletePost: async function (req, res) {
+    const { id } = req.params;
+    const post = await Post.findOneAndDelete({ _id: id });
+
+    return res.json({
+      message: "Post deleted, successfully.",
+    });
+  },
 };
 
 module.exports = postController;
