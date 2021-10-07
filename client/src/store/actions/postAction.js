@@ -74,6 +74,27 @@ const postAction = {
         }
       });
   },
+  deletePost: (id, cb) => (dispatch) => {
+    fetch(`${uri}/post/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message) {
+          cb(true);
+        } else {
+          dispatch({
+            type: "POST_DELETE_FAIL",
+            error: data.error,
+          });
+          cb(false);
+        }
+      });
+  },
 };
 
 export default postAction;

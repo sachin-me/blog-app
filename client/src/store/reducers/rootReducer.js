@@ -80,6 +80,13 @@ function rootReducer(state = initState, action) {
       };
     }
 
+    case "POST_DELETE_FAIL": {
+      return {
+        ...state,
+        error: action.error,
+      };
+    }
+
     default:
       return state;
   }
