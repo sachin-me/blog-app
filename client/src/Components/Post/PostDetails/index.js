@@ -34,7 +34,8 @@ function PostDetails(props) {
       </div>
     );
   }
-
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log({ user, post });
   return (
     <Card className="center">
       {(Object.keys(post).length !== 0 && (
@@ -42,9 +43,13 @@ function PostDetails(props) {
           <Card.Title>{post.title}</Card.Title>
           <Card.Text>{post.text}</Card.Text>
           <Card.Text>{new Date(post.created_at).toLocaleString()}</Card.Text>
-          <Button variant="primary" type="submit">
-            Delete
-          </Button>
+          {
+            post.user.includes(user.id) && (
+              <Button variant="primary" type="submit">
+                Delete
+              </Button>
+            )
+          }
         </Card.Body>
       )) || <Card.Body className="card-info">No Post found :)</Card.Body>}
     </Card>

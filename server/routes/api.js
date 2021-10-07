@@ -1,6 +1,7 @@
 const express = require("express");
 const postController = require("../controllers/post.controller");
 const userController = require("../controllers/user.controller");
+const { isLoggedIn } = require("../modules/auth");
 const router = express.Router();
 
 // This api'll create a new user
@@ -16,6 +17,8 @@ router.post("/post", postController.create);
 router.get("/posts", postController.list);
 // It'll get post details
 router.get("/post/:id", postController.getPost);
+// It'll delete post details
+router.delete("/post/:id", isLoggedIn, postController.deletePost);
 
 // POST Api ends here
 module.exports = router;
